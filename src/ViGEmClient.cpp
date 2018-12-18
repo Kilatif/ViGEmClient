@@ -259,8 +259,8 @@ PVIGEM_TARGET vigem_target_ds4_alloc(void)
     if (!target)
         return nullptr;
 
-    target->VendorId = 0x054C;
-    target->ProductId = 0x05C4;
+    target->VendorId = 0x057E;
+    target->ProductId = 0x2009;
 
     return target;
 }
