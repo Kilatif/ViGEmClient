@@ -309,20 +309,7 @@ VOID FORCEINLINE XUSB_GET_USER_INDEX_INIT(
 
 typedef struct _DS4_OUTPUT_REPORT
 {
-    //
-    // Vibration intensity value of the small motor (0-255).
-    // 
-    UCHAR SmallMotor;
-
-    //
-    // Vibration intensity value of the large motor (0-255).
-    // 
-    UCHAR LargeMotor;
-
-    //
-    // Color values of the Lightbar.
-    //
-    DS4_LIGHTBAR_COLOR LightbarColor;
+	UCHAR Report[64];
 
 } DS4_OUTPUT_REPORT, *PDS4_OUTPUT_REPORT;
 
