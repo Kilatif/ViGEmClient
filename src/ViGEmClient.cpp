@@ -566,9 +566,7 @@ VIGEM_ERROR vigem_target_ds4_register_notification(
                 reinterpret_cast<PFN_VIGEM_DS4_NOTIFICATION>(_Target->Notification)(
                     _Client,
                     _Target,
-                    notify.Report.LargeMotor,
-                    notify.Report.SmallMotor,
-                    notify.Report.LightbarColor);
+                    notify.Report.Report);
             }
             else
             {
@@ -712,6 +710,12 @@ VIGEM_ERROR vigem_target_ds4_update(
             CloseHandle(lOverlapped.hEvent);
             return VIGEM_ERROR_INVALID_TARGET;
         }
+		
+    	if (GetLastError() != NO_ERROR)
+		{
+			CloseHandle(lOverlapped.hEvent);
+			return VIGEM_ERROR_UNKNOWN_ERROR;
+		}
     }
 
     CloseHandle(lOverlapped.hEvent);
