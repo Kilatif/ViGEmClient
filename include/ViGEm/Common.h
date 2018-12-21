@@ -167,6 +167,7 @@ typedef enum _DS4_DPAD_DIRECTIONS
 // 
 typedef struct _DS4_REPORT
 {
+	UCHAR TimerStatus;
 	UCHAR Report[64];
 
 } DS4_REPORT, *PDS4_REPORT;
