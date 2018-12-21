@@ -369,8 +369,6 @@ typedef struct _DS4_SUBMIT_REPORT
     // 
     DS4_REPORT Report;
 
-	UCHAR TimerStatus;
-
 } DS4_SUBMIT_REPORT, *PDS4_SUBMIT_REPORT;
 
 //
