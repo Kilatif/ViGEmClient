@@ -384,7 +384,7 @@ VOID FORCEINLINE DS4_SUBMIT_REPORT_INIT(
     Report->Size = sizeof(DS4_SUBMIT_REPORT);
     Report->SerialNo = SerialNo;
 
-    DS4_REPORT_INIT(&Report->Report);
+    //DS4_REPORT_INIT(&Report->Report);
 }
 
 #pragma endregion

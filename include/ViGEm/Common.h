@@ -167,40 +167,7 @@ typedef enum _DS4_DPAD_DIRECTIONS
 // 
 typedef struct _DS4_REPORT
 {
-    BYTE bThumbLX;
-    BYTE bThumbLY;
-    BYTE bThumbRX;
-    BYTE bThumbRY;
-    USHORT wButtons;
-    BYTE bSpecial;
-    BYTE bTriggerL;
-    BYTE bTriggerR;
+	UCHAR Report[64];
 
 } DS4_REPORT, *PDS4_REPORT;
-
-//
-// Sets the current state of the D-PAD on a DualShock 4 report.
-// 
-VOID FORCEINLINE DS4_SET_DPAD(
-    _Out_ PDS4_REPORT Report,
-    _In_ DS4_DPAD_DIRECTIONS Dpad
-)
-{
-    Report->wButtons &= ~0xF;
-    Report->wButtons |= (USHORT)Dpad;
-}
-
-VOID FORCEINLINE DS4_REPORT_INIT(
-    _Out_ PDS4_REPORT Report
-)
-{
-    RtlZeroMemory(Report, sizeof(DS4_REPORT));
-
-    Report->bThumbLX = 0x80;
-    Report->bThumbLY = 0x80;
-    Report->bThumbRX = 0x80;
-    Report->bThumbRY = 0x80;
-
-    DS4_SET_DPAD(Report, DS4_BUTTON_DPAD_NONE);
-}
 
