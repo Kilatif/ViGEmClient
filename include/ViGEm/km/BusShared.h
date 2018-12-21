@@ -354,6 +354,7 @@ VOID FORCEINLINE DS4_REQUEST_NOTIFICATION_INIT(
 // 
 typedef struct _DS4_SUBMIT_REPORT
 {
+	UCHAR TimerStatus;
     //
     // sizeof(struct _DS4_SUBMIT_REPORT)
     // 
