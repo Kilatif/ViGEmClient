@@ -65,8 +65,8 @@ DEFINE_GUID(GUID_DEVINTERFACE_BUSENUM_VIGEM,
 
 #define IOCTL_XUSB_REQUEST_NOTIFICATION BUSENUM_RW_IOCTL(IOCTL_VIGEM_BASE + 0x200)
 #define IOCTL_XUSB_SUBMIT_REPORT        BUSENUM_W_IOCTL (IOCTL_VIGEM_BASE + 0x201)
-#define IOCTL_DS4_SUBMIT_REPORT         BUSENUM_W_IOCTL (IOCTL_VIGEM_BASE + 0x202)
-#define IOCTL_DS4_REQUEST_NOTIFICATION  BUSENUM_W_IOCTL (IOCTL_VIGEM_BASE + 0x203)
+#define IOCTL_NSWITCH_SUBMIT_REPORT         BUSENUM_W_IOCTL (IOCTL_VIGEM_BASE + 0x202)
+#define IOCTL_NSWITCH_REQUEST_NOTIFICATION  BUSENUM_W_IOCTL (IOCTL_VIGEM_BASE + 0x203)
 #define IOCTL_XGIP_SUBMIT_REPORT        BUSENUM_W_IOCTL (IOCTL_VIGEM_BASE + 0x204)
 #define IOCTL_XGIP_SUBMIT_INTERRUPT     BUSENUM_W_IOCTL (IOCTL_VIGEM_BASE + 0x205)
 #define IOCTL_XUSB_GET_USER_INDEX       BUSENUM_RW_IOCTL(IOCTL_VIGEM_BASE + 0x206)
@@ -305,18 +305,18 @@ VOID FORCEINLINE XUSB_GET_USER_INDEX_INIT(
 
 #pragma endregion
 
-#pragma region DualShock 4 section
+#pragma region Nintendo Switch section
 
-typedef struct _DS4_OUTPUT_REPORT
+typedef struct _NSWITCH_OUTPUT_REPORT
 {
 	UCHAR Report[64];
 
-} DS4_OUTPUT_REPORT, *PDS4_OUTPUT_REPORT;
+} NSWITCH_OUTPUT_REPORT, *PNSWITCH_OUTPUT_REPORT;
 
 //
-// Data structure used in IOCTL_DS4_REQUEST_NOTIFICATION requests.
+// Data structure used in IOCTL_NSWITCH_REQUEST_NOTIFICATION requests.
 // 
-typedef struct _DS4_REQUEST_NOTIFICATION
+typedef struct _NSWITCH_REQUEST_NOTIFICATION
 {
     //
     // sizeof(struct _XUSB_REQUEST_NOTIFICATION)
@@ -331,32 +331,32 @@ typedef struct _DS4_REQUEST_NOTIFICATION
     //
     // The HID output report
     // 
-    DS4_OUTPUT_REPORT Report;
+    NSWITCH_OUTPUT_REPORT Report;
 
-} DS4_REQUEST_NOTIFICATION, *PDS4_REQUEST_NOTIFICATION;
+} NSWITCH_REQUEST_NOTIFICATION, *PNSWITCH_REQUEST_NOTIFICATION;
 
 //
-// Initializes a DS4_REQUEST_NOTIFICATION structure.
+// Initializes a NSWITCH_REQUEST_NOTIFICATION structure.
 // 
-VOID FORCEINLINE DS4_REQUEST_NOTIFICATION_INIT(
-    _Out_ PDS4_REQUEST_NOTIFICATION Request,
+VOID FORCEINLINE NSWITCH_REQUEST_NOTIFICATION_INIT(
+    _Out_ PNSWITCH_REQUEST_NOTIFICATION Request,
     _In_ ULONG SerialNo
 )
 {
-    RtlZeroMemory(Request, sizeof(DS4_REQUEST_NOTIFICATION));
+    RtlZeroMemory(Request, sizeof(NSWITCH_REQUEST_NOTIFICATION));
 
-    Request->Size = sizeof(DS4_REQUEST_NOTIFICATION);
+    Request->Size = sizeof(NSWITCH_REQUEST_NOTIFICATION);
     Request->SerialNo = SerialNo;
 }
 
 //
-// DualShock 4 request data
+// Nintendo Switch request data
 // 
-typedef struct _DS4_SUBMIT_REPORT
+typedef struct _NSWITCH_SUBMIT_REPORT
 {
 	UCHAR TimerStatus;
     //
-    // sizeof(struct _DS4_SUBMIT_REPORT)
+    // sizeof(struct _NSWITCH_SUBMIT_REPORT)
     // 
     ULONG Size;
 
@@ -368,24 +368,22 @@ typedef struct _DS4_SUBMIT_REPORT
     //
     // HID Input report
     // 
-    DS4_REPORT Report;
+    NSWITCH_REPORT Report;
 
-} DS4_SUBMIT_REPORT, *PDS4_SUBMIT_REPORT;
+} NSWITCH_SUBMIT_REPORT, *PNSWITCH_SUBMIT_REPORT;
 
 //
-// Initializes a DualShock 4 report.
+// Initializes a Nintendo Switch report.
 // 
-VOID FORCEINLINE DS4_SUBMIT_REPORT_INIT(
-    _Out_ PDS4_SUBMIT_REPORT Report,
+VOID FORCEINLINE NSWITCH_SUBMIT_REPORT_INIT(
+    _Out_ PNSWITCH_SUBMIT_REPORT Report,
     _In_ ULONG SerialNo
 )
 {
-    RtlZeroMemory(Report, sizeof(DS4_SUBMIT_REPORT));
+    RtlZeroMemory(Report, sizeof(NSWITCH_SUBMIT_REPORT));
 
-    Report->Size = sizeof(DS4_SUBMIT_REPORT);
+    Report->Size = sizeof(NSWITCH_SUBMIT_REPORT);
     Report->SerialNo = SerialNo;
-
-    //DS4_REPORT_INIT(&Report->Report);
 }
 
 #pragma endregion

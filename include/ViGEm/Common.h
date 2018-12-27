@@ -39,9 +39,9 @@ typedef enum _VIGEM_TARGET_TYPE
     // 
     XboxOneWired,
     //
-    // Sony DualShock 4 (wired)
+    // Nintendo Switch (wired)
     // 
-    DualShock4Wired
+    NintendoSwitchWired
 
 } VIGEM_TARGET_TYPE, *PVIGEM_TARGET_TYPE;
 
@@ -94,81 +94,12 @@ VOID FORCEINLINE XUSB_REPORT_INIT(
 }
 
 //
-// The color value (RGB) of a DualShock 4 Lightbar
+// Nintendo Switch HID Input report
 // 
-typedef struct _DS4_LIGHTBAR_COLOR
-{
-    //
-    // Red part of the Lightbar (0-255).
-    //
-    UCHAR Red;
-
-    //
-    // Green part of the Lightbar (0-255).
-    //
-    UCHAR Green;
-
-    //
-    // Blue part of the Lightbar (0-255).
-    //
-    UCHAR Blue;
-
-} DS4_LIGHTBAR_COLOR, *PDS4_LIGHTBAR_COLOR;
-
-//
-// DualShock 4 digital buttons
-// 
-typedef enum _DS4_BUTTONS
-{
-    DS4_BUTTON_THUMB_RIGHT      = 1 << 15,
-    DS4_BUTTON_THUMB_LEFT       = 1 << 14,
-    DS4_BUTTON_OPTIONS          = 1 << 13,
-    DS4_BUTTON_SHARE            = 1 << 12,
-    DS4_BUTTON_TRIGGER_RIGHT    = 1 << 11,
-    DS4_BUTTON_TRIGGER_LEFT     = 1 << 10,
-    DS4_BUTTON_SHOULDER_RIGHT   = 1 << 9,
-    DS4_BUTTON_SHOULDER_LEFT    = 1 << 8,
-    DS4_BUTTON_TRIANGLE         = 1 << 7,
-    DS4_BUTTON_CIRCLE           = 1 << 6,
-    DS4_BUTTON_CROSS            = 1 << 5,
-    DS4_BUTTON_SQUARE           = 1 << 4
-
-} DS4_BUTTONS, *PDS4_BUTTONS;
-
-//
-// DualShock 4 special buttons
-// 
-typedef enum _DS4_SPECIAL_BUTTONS
-{
-    DS4_SPECIAL_BUTTON_PS           = 1 << 0,
-    DS4_SPECIAL_BUTTON_TOUCHPAD     = 1 << 1
-
-} DS4_SPECIAL_BUTTONS, *PDS4_SPECIAL_BUTTONS;
-
-//
-// DualShock 4 directional pad (HAT) values
-// 
-typedef enum _DS4_DPAD_DIRECTIONS
-{
-    DS4_BUTTON_DPAD_NONE        = 0x8,
-    DS4_BUTTON_DPAD_NORTHWEST   = 0x7,
-    DS4_BUTTON_DPAD_WEST        = 0x6,
-    DS4_BUTTON_DPAD_SOUTHWEST   = 0x5,
-    DS4_BUTTON_DPAD_SOUTH       = 0x4,
-    DS4_BUTTON_DPAD_SOUTHEAST   = 0x3,
-    DS4_BUTTON_DPAD_EAST        = 0x2,
-    DS4_BUTTON_DPAD_NORTHEAST   = 0x1,
-    DS4_BUTTON_DPAD_NORTH       = 0x0
-
-} DS4_DPAD_DIRECTIONS, *PDS4_DPAD_DIRECTIONS;
-
-//
-// DualShock 4 HID Input report
-// 
-typedef struct _DS4_REPORT
+typedef struct _NSWITCH_REPORT
 {
 	UCHAR TimerStatus;
 	UCHAR Report[64];
 
-} DS4_REPORT, *PDS4_REPORT;
+} NSWITCH_REPORT, *PNSWITCH_REPORT;
 
