@@ -118,15 +118,15 @@ extern "C" {
     typedef EVT_VIGEM_X360_NOTIFICATION *PFN_VIGEM_X360_NOTIFICATION;
 
     typedef
-        _Function_class_(EVT_VIGEM_DS4_NOTIFICATION)
+        _Function_class_(EVT_VIGEM_NSWITCH_NOTIFICATION)
         VOID
-        EVT_VIGEM_DS4_NOTIFICATION(
+		EVT_VIGEM_NSWITCH_NOTIFICATION(
             PVIGEM_CLIENT Client,
             PVIGEM_TARGET Target,
             UCHAR Report[64]
         );
 
-    typedef EVT_VIGEM_DS4_NOTIFICATION *PFN_VIGEM_DS4_NOTIFICATION;
+    typedef EVT_VIGEM_NSWITCH_NOTIFICATION *PFN_VIGEM_NSWITCH_NOTIFICATION;
 
     /**
      * \fn  PVIGEM_CLIENT vigem_alloc(void);
@@ -195,16 +195,16 @@ extern "C" {
     VIGEM_API PVIGEM_TARGET vigem_target_x360_alloc(void);
 
     /**
-     * \fn  PVIGEM_TARGET vigem_target_ds4_alloc(void);
+     * \fn  PVIGEM_TARGET vigem_target_nswitch_alloc(void);
      *
-     * \brief   Allocates an object representing a DualShock 4 Controller device.
+     * \brief   Allocates an object representing a Nintendo Switch Controller device.
      *
      * \author  Benjamin "Nefarius" Höglinger
      * \date    28.08.2017
      *
-     * \return  A PVIGEM_TARGET representing a DualShock 4 Controller device.
+     * \return  A PVIGEM_TARGET representing a Nintendo Switch Controller device.
      */
-    VIGEM_API PVIGEM_TARGET vigem_target_ds4_alloc(void);
+    VIGEM_API PVIGEM_TARGET vigem_target_nswitch_alloc(void);
 
     /**
      * \fn  void vigem_target_free(PVIGEM_TARGET target);
@@ -294,7 +294,7 @@ extern "C" {
     VIGEM_API VIGEM_ERROR vigem_target_x360_register_notification(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, PFN_VIGEM_X360_NOTIFICATION notification);
 
     /**
-     * \fn  VIGEM_ERROR vigem_target_ds4_register_notification(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, PVIGEM_DS4_NOTIFICATION notification);
+     * \fn  VIGEM_ERROR vigem_target_nswitch_register_notification(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, PVIGEM_NSWITCH_NOTIFICATION notification);
      *
      * \brief   Registers a function which gets called, when LightBar or vibration state changes
      *          occur on the provided target device. This function fails if the provided target
@@ -309,7 +309,7 @@ extern "C" {
      *
      * \return  A VIGEM_ERROR.
      */
-    VIGEM_API VIGEM_ERROR vigem_target_ds4_register_notification(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, PFN_VIGEM_DS4_NOTIFICATION notification);
+    VIGEM_API VIGEM_ERROR vigem_target_nswitch_register_notification(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, PFN_VIGEM_NSWITCH_NOTIFICATION notification);
 
     /**
      * \fn  void vigem_target_x360_unregister_notification(PVIGEM_TARGET target);
@@ -324,7 +324,7 @@ extern "C" {
     VIGEM_API void vigem_target_x360_unregister_notification(PVIGEM_TARGET target);
 
     /**
-     * \fn  void vigem_target_ds4_unregister_notification(PVIGEM_TARGET target);
+     * \fn  void vigem_target_nswitch_unregister_notification(PVIGEM_TARGET target);
      *
      * \brief   Removes a previously registered callback function from the provided target object.
      *
@@ -333,7 +333,7 @@ extern "C" {
      *
      * \param   target  The target device object.
      */
-    VIGEM_API void vigem_target_ds4_unregister_notification(PVIGEM_TARGET target);
+    VIGEM_API void vigem_target_nswitch_unregister_notification(PVIGEM_TARGET target);
 
     /**
      * \fn  void vigem_target_set_vid(PVIGEM_TARGET target, USHORT vid);
@@ -406,7 +406,7 @@ extern "C" {
     VIGEM_API VIGEM_ERROR vigem_target_x360_update(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, XUSB_REPORT report);
 
     /**
-     * \fn  VIGEM_ERROR vigem_target_ds4_update(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, DS4_REPORT report);
+     * \fn  VIGEM_ERROR vigem_target_nswitch_update(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, NSWITCH_REPORT report);
      *
      * \brief   Sends a state report to the provided target device.
      *
@@ -419,7 +419,7 @@ extern "C" {
      *
      * \return  A VIGEM_ERROR.
      */
-    VIGEM_API VIGEM_ERROR vigem_target_ds4_update(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, DS4_REPORT report);
+    VIGEM_API VIGEM_ERROR vigem_target_nswitch_update(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, NSWITCH_REPORT report);
 
     /**
      * \fn  ULONG vigem_target_get_index(PVIGEM_TARGET target);

@@ -252,9 +252,9 @@ PVIGEM_TARGET vigem_target_x360_alloc(void)
     return target;
 }
 
-PVIGEM_TARGET vigem_target_ds4_alloc(void)
+PVIGEM_TARGET vigem_target_nswitch_alloc(void)
 {
-    const auto target = VIGEM_TARGET_ALLOC_INIT(DualShock4Wired);
+    const auto target = VIGEM_TARGET_ALLOC_INIT(NintendoSwitchWired);
 
     if (!target)
         return nullptr;
@@ -509,10 +509,10 @@ VIGEM_ERROR vigem_target_x360_register_notification(
     return VIGEM_ERROR_NONE;
 }
 
-VIGEM_ERROR vigem_target_ds4_register_notification(
+VIGEM_ERROR vigem_target_nswitch_register_notification(
     PVIGEM_CLIENT vigem,
     PVIGEM_TARGET target,
-    PFN_VIGEM_DS4_NOTIFICATION notification
+	PFN_VIGEM_NSWITCH_NOTIFICATION notification
 )
 {
     if (!vigem)
@@ -541,13 +541,13 @@ VIGEM_ERROR vigem_target_ds4_register_notification(
         OVERLAPPED lOverlapped = { 0 };
         lOverlapped.hEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
 
-        DS4_REQUEST_NOTIFICATION notify;
-        DS4_REQUEST_NOTIFICATION_INIT(&notify, _Target->SerialNo);
+        NSWITCH_REQUEST_NOTIFICATION notify;
+        NSWITCH_REQUEST_NOTIFICATION_INIT(&notify, _Target->SerialNo);
 
         do
         {
             DeviceIoControl(_Client->hBusDevice,
-                IOCTL_DS4_REQUEST_NOTIFICATION,
+                IOCTL_NSWITCH_REQUEST_NOTIFICATION,
                 &notify,
                 notify.Size,
                 &notify,
@@ -563,7 +563,7 @@ VIGEM_ERROR vigem_target_ds4_register_notification(
                     return;
                 }
 
-                reinterpret_cast<PFN_VIGEM_DS4_NOTIFICATION>(_Target->Notification)(
+                reinterpret_cast<PFN_VIGEM_NSWITCH_NOTIFICATION>(_Target->Notification)(
                     _Client,
                     _Target,
                     notify.Report.Report);
@@ -588,7 +588,7 @@ void vigem_target_x360_unregister_notification(PVIGEM_TARGET target)
     target->Notification = NULL;
 }
 
-void vigem_target_ds4_unregister_notification(PVIGEM_TARGET target)
+void vigem_target_nswitch_unregister_notification(PVIGEM_TARGET target)
 {
     target->Notification = NULL;
 }
@@ -665,10 +665,10 @@ VIGEM_ERROR vigem_target_x360_update(
     return VIGEM_ERROR_NONE;
 }
 
-VIGEM_ERROR vigem_target_ds4_update(
+VIGEM_ERROR vigem_target_nswitch_update(
     PVIGEM_CLIENT vigem,
     PVIGEM_TARGET target,
-    DS4_REPORT report
+    NSWITCH_REPORT report
 )
 {
     if (!vigem)
@@ -687,14 +687,14 @@ VIGEM_ERROR vigem_target_ds4_update(
     OVERLAPPED lOverlapped = { 0 };
     lOverlapped.hEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
 
-    DS4_SUBMIT_REPORT dsr;
-    DS4_SUBMIT_REPORT_INIT(&dsr, target->SerialNo);
+    NSWITCH_SUBMIT_REPORT dsr;
+    NSWITCH_SUBMIT_REPORT_INIT(&dsr, target->SerialNo);
 
     dsr.Report = report;
 
     DeviceIoControl(
         vigem->hBusDevice,
-        IOCTL_DS4_SUBMIT_REPORT,
+        IOCTL_NSWITCH_SUBMIT_REPORT,
         &dsr,
         dsr.Size,
         nullptr,
