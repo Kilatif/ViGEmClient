@@ -406,7 +406,7 @@ extern "C" {
     VIGEM_API VIGEM_ERROR vigem_target_x360_update(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, XUSB_REPORT report);
 
     /**
-     * \fn  VIGEM_ERROR vigem_target_nswitch_update(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, NSWITCH_REPORT report);
+     * \fn  VIGEM_ERROR vigem_target_nswitch_update(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, UCHAR report[NSWITCH_REPORT_SIZE], UCHAR timerStatus);
      *
      * \brief   Sends a state report to the provided target device.
      *
@@ -419,7 +419,7 @@ extern "C" {
      *
      * \return  A VIGEM_ERROR.
      */
-    VIGEM_API VIGEM_ERROR vigem_target_nswitch_update(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, NSWITCH_REPORT report);
+    VIGEM_API VIGEM_ERROR vigem_target_nswitch_update(PVIGEM_CLIENT vigem, PVIGEM_TARGET target, UCHAR report[NSWITCH_REPORT_SIZE], UCHAR timerStatus);
 
     /**
      * \fn  ULONG vigem_target_get_index(PVIGEM_TARGET target);

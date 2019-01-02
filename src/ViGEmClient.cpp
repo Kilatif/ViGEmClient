@@ -566,12 +566,13 @@ VIGEM_ERROR vigem_target_nswitch_register_notification(
                 reinterpret_cast<PFN_VIGEM_NSWITCH_NOTIFICATION>(_Target->Notification)(
                     _Client,
                     _Target,
-                    notify.Report.Report);
+                    notify.OutputReport);
             }
             else
             {
                 error = GetLastError();
             }
+
         } while (error != ERROR_OPERATION_ABORTED && error != ERROR_ACCESS_DENIED);
 
         CloseHandle(lOverlapped.hEvent);
@@ -668,7 +669,8 @@ VIGEM_ERROR vigem_target_x360_update(
 VIGEM_ERROR vigem_target_nswitch_update(
     PVIGEM_CLIENT vigem,
     PVIGEM_TARGET target,
-    NSWITCH_REPORT report
+	UCHAR report[NSWITCH_REPORT_SIZE],
+	UCHAR timerStatus
 )
 {
     if (!vigem)
@@ -690,7 +692,8 @@ VIGEM_ERROR vigem_target_nswitch_update(
     NSWITCH_SUBMIT_REPORT dsr;
     NSWITCH_SUBMIT_REPORT_INIT(&dsr, target->SerialNo);
 
-    dsr.Report = report;
+	dsr.TimerStatus = timerStatus;
+	RtlCopyMemory(dsr.InputReport, report, NSWITCH_REPORT_SIZE);
 
     DeviceIoControl(
         vigem->hBusDevice,
