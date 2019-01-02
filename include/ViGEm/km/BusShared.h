@@ -76,7 +76,7 @@ DEFINE_GUID(GUID_DEVINTERFACE_BUSENUM_VIGEM,
 //  Data structure used in PlugIn and UnPlug ioctls
 //
 
-#define NSWITCH_OUTPUT_REPORT_SIZE					0x40
+#define NSWITCH_REPORT_SIZE					0x40
 
 #pragma region Plugin
 
@@ -327,7 +327,7 @@ typedef struct _NSWITCH_REQUEST_NOTIFICATION
     //
     // The HID output report
     // 
-    UCHAR OutputReport[NSWITCH_OUTPUT_REPORT_SIZE];
+    UCHAR OutputReport[NSWITCH_REPORT_SIZE];
 
 } NSWITCH_REQUEST_NOTIFICATION, *PNSWITCH_REQUEST_NOTIFICATION;
 
@@ -364,7 +364,7 @@ typedef struct _NSWITCH_SUBMIT_REPORT
     //
     // HID Input report
     // 
-    NSWITCH_REPORT Report;
+    UCHAR InputReport[NSWITCH_REPORT_SIZE];
 
 } NSWITCH_SUBMIT_REPORT, *PNSWITCH_SUBMIT_REPORT;
 

@@ -93,13 +93,3 @@ VOID FORCEINLINE XUSB_REPORT_INIT(
     RtlZeroMemory(Report, sizeof(XUSB_REPORT));
 }
 
-//
-// Nintendo Switch HID Input report
-// 
-typedef struct _NSWITCH_REPORT
-{
-	UCHAR TimerStatus;
-	UCHAR Report[64];
-
-} NSWITCH_REPORT, *PNSWITCH_REPORT;
-
