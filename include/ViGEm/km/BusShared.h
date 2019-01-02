@@ -76,6 +76,8 @@ DEFINE_GUID(GUID_DEVINTERFACE_BUSENUM_VIGEM,
 //  Data structure used in PlugIn and UnPlug ioctls
 //
 
+#define NSWITCH_OUTPUT_REPORT_SIZE					0x40
+
 #pragma region Plugin
 
 //
@@ -307,12 +309,6 @@ VOID FORCEINLINE XUSB_GET_USER_INDEX_INIT(
 
 #pragma region Nintendo Switch section
 
-typedef struct _NSWITCH_OUTPUT_REPORT
-{
-	UCHAR Report[64];
-
-} NSWITCH_OUTPUT_REPORT, *PNSWITCH_OUTPUT_REPORT;
-
 //
 // Data structure used in IOCTL_NSWITCH_REQUEST_NOTIFICATION requests.
 // 
@@ -331,7 +327,7 @@ typedef struct _NSWITCH_REQUEST_NOTIFICATION
     //
     // The HID output report
     // 
-    NSWITCH_OUTPUT_REPORT Report;
+    UCHAR OutputReport[NSWITCH_OUTPUT_REPORT_SIZE];
 
 } NSWITCH_REQUEST_NOTIFICATION, *PNSWITCH_REQUEST_NOTIFICATION;
 
